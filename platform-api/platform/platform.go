@@ -27,11 +27,14 @@
 package platform
 
 import (
+	"fmt"
 	"log/slog"
 
+	"github.com/wso2/api-platform/httpkit/httpclient"
 	"github.com/wso2/api-platform/platform-api/config"
 	"github.com/wso2/api-platform/platform-api/internal/logger"
 	"github.com/wso2/api-platform/platform-api/internal/server"
+	"github.com/wso2/api-platform/platform-api/internal/utils"
 	"github.com/wso2/api-platform/platform-api/pdk"
 )
 
@@ -65,6 +68,18 @@ func New(opts ...Option) (*App, error) {
 			Format: a.cfg.Logging.Format,
 		})
 	}
+
+	// TEMP local patch (PR #3482 testing): the OSS cmd/main.go builds a shared HTTP
+	// client and calls utils.InitSharedHTTPClient before wiring the server. Library
+	// consumers of platform.New(...) never reach that init, so PR #3482's new
+	// http_portal_publisher fatals at App construction. Initialize with defaults
+	// here so the wrapper module can boot; revert once the PR moves this init into
+	// the platform façade properly.
+	sharedHTTPClient, err := httpclient.New(httpclient.DefaultConfig())
+	if err != nil {
+		return nil, fmt.Errorf("init shared http client: %w", err)
+	}
+	utils.InitSharedHTTPClient(sharedHTTPClient, a.cfg.MCPResponseMaxBytes)
 
 	return a, nil
 }
