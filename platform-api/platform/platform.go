@@ -66,6 +66,11 @@ func New(opts ...Option) (*App, error) {
 		})
 	}
 
+	// TEMP local test patch: force the shared outbound HTTP client to skip TLS
+	// verification so the plugin can reach portals with self-signed kgateway
+	// certs (local k3d). Revert before merging upstream.
+	a.cfg.HTTPClient.TLS.InsecureSkipVerify = true //nolint:gosec // local dev only
+
 	// Every entry point must build the shared outbound HTTP client before the server
 	// starts; cmd/main.go does the same.
 	if err := server.InitSharedHTTPClient(a.cfg); err != nil {
