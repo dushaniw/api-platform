@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-AUTH-01,Requests without a valid caller identity are rejected,cloud,PA,security,P0,,Call cloud routes with no token; with an invalid token,401,,None,,
+C-AUTH-02,Scope matrix for every cloud route,cloud,PA,security,P1,"Admin, developer and read-only users","Outline over environments, managed gateways, pipelines, deployments, managed portals, logs",Matches the documented scope table,,None,,
+C-AUTH-03,Two-org isolation for every cloud resource,cloud,PA,isolation,P0,Two orgs with one of each resource,"Org B reads, updates, deletes org A ids",404; lists never show A resources,,None,,

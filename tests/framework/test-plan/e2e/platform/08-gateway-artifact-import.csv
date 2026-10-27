@@ -1,0 +1,6 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+DP2CP-01,Artifact created on the gateway appears in the control plane as read-only,on-prem,PA+GW,positive,P1,Gateway with sync enabled,Create API directly on the gateway; GET in control plane,API listed with gateway origin,,it: gateway/control-plane/dp_to_cp.feature,extend existing,
+DP2CP-02,Runtime-changing edits on a gateway-origin API are refused; metadata edits allowed,on-prem,PA+GW,negative,P1,DP2CP-01,PUT changing operations; PUT changing description,First refused with a clear reason; second accepted,,None,it: gateway/control-plane/dp_to_cp.feature,
+DP2CP-03,Gateway-origin API cannot be deleted in the control plane while deployed,on-prem,PA+GW,negative,P1,DP2CP-01,DELETE in control plane,Refused until undeployed everywhere,,None,it: gateway/control-plane/dp_to_cp.feature,
+DP2CP-04,Sync disabled: nothing is pushed,on-prem,PA+GW,positive,P2,dp-to-cp sync disabled overlay,Create API on gateway,Not listed in control plane,,it: gateway/control-plane/dp_to_cp_sync_disabled.feature,covered,
+DP2CP-05,Rejected push is retried on reconnect,on-prem,PA+GW,resilience,P2,,,,,it: gateway/control-plane/dp_to_cp_reconnect.feature,covered,

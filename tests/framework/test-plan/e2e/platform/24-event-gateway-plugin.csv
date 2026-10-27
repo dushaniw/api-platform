@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+EVT-01,"WebSub API create, deploy and deliver",on-prem,PA+GW,positive,P2,Experimental platform-api image and event gateway,Create WebSub API; deploy; publish an event,Subscriber receives event,,None,,
+EVT-02,WebSub HMAC secret rotation,on-prem,PA+GW,security,P2,EVT-01,Rotate HMAC secret,Deliveries signed with the new secret,,None,,
+EVT-03,WebBroker API create and deploy,on-prem,PA+GW,positive,P2,,Create; deploy,Gateway serves it,,None,,

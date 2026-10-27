@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+DB-01,"Core PA+GW journeys on sqlite, postgres and sqlserver",on-prem,PA+GW,positive,P0,,,,,it: platform-api-sqlite / -postgres / -sqlserver blocks,covered,
+DB-02,Publishing and webhook journeys on sqlserver,on-prem,PA+GW+AP,positive,P1,,Run devportal-webhook and platform-api-gateway-api-portal blocks with sqlserver,Same results as postgres,,None (blocks pin postgres),it-suite.yaml: add db matrix to the three-way blocks,
+DB-03,Migrated v1 postgres database serves existing data,on-prem,PA+GW,positive,P1,v1 database with APIs and deployments,Run migration; start platform-api; gateway connects,Existing APIs listed and served,,None,it: new block platform-api-migration,

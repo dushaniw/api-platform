@@ -1,0 +1,6 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+MON-01,Meter CRUD,both,PA,positive,P2,,,,,it: management-portal/monetization/meters.feature,covered,
+MON-02,Priced plan exposes pricing,both,PA,positive,P2,,,,,it: management-portal/monetization/priced_plans.feature,covered,
+MON-03,Publishing an API with a priced plan syncs plan and meters to a real API Portal,both,PA+AP,positive,P1,Registered portal; priced plan with meters,Publish API,Portal lists the plan with its price and meters,,None (portal_events.feature simulates the portal),it: apiportal/publishing/publication_monetization.feature,
+MON-04,Portal plan and meter events reach the control plane through the real webhook,both,PA+AP,positive,P1,Webhooks enabled on both,Change plan / meter in the portal,Control plane reflects the change,,Partial: management-portal/monetization/portal_events.feature (simulated),it: apiportal/webhooks/monetization_webhooks.feature,
+MON-05,Billing update from the portal changes gateway access,both,PA+GW+AP,positive,P1,Paid subscription created in the portal,"Portal sends billing_updated (unpaid, then paid)",Gateway blocks then allows,,None,it: apiportal/webhooks/monetization_webhooks.feature,

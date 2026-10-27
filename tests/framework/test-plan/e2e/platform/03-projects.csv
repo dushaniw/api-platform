@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+PROJ-01,"Project create, list, get, update, delete",both,PA,positive,P1,Authenticated publisher,POST /projects; GET list; GET by id; PUT name; DELETE,Each step returns expected status; list reflects changes,,Cloud: cloud/features/apip_project.feature; on-prem only used as setup,it: management-portal/resources/project_management.feature,
+PROJ-02,Project with applications cannot be deleted,both,PA,negative,P1,Project with an application,DELETE /projects/{id},409 with a clear reason; project still listed,,None,it: management-portal/resources/project_management.feature,
+PROJ-03,Duplicate project name in the org is a conflict,both,PA,negative,P2,Project P exists,POST /projects with same name,409; no second project,,None,it: management-portal/resources/project_management.feature,

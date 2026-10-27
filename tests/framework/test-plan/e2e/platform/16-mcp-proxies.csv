@@ -1,0 +1,6 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+MCP-01,Fetch server info from an MCP upstream,both,PA,positive,P1,Mock MCP server,POST /mcp-proxies/fetch-server-info,Server name and tools returned,mock MCP,None,,
+MCP-02,"Create, deploy and call an MCP proxy through the gateway",both,PA+GW,positive,P0,AI gateway; mock MCP,Create; deploy; initialize and tools/list through gateway,Valid MCP responses,mock MCP,Partial: ui mcp_proxy.feature,it: ai-workspace-gateway/mcp/mcp_proxy_cp.feature,
+MCP-03,MCP spec versions negotiated through a control-plane-deployed proxy,both,PA+GW,positive,P1,,,Both supported spec versions negotiate,,Written but not run: ai-workspace-gateway/mcp/mcp_spec_versions_cp.feature,Add it to a PA+GW block,
+MCP-04,Upstream credential kept when omitted on update,both,PA+GW,positive,P2,Proxy with upstream credential,PUT without the credential; redeploy; call,Upstream still receives the credential,,None,,
+MCP-05,Server info fetch respects outbound destination and size limits,both,PA,security,P2,,Fetch from link-local metadata address; from an oversized response,Both refused,,None,,

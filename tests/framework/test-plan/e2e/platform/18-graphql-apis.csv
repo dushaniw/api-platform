@@ -1,0 +1,5 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+GQL-01,"Create from SDL, deploy and query through the gateway",both,PA+GW,positive,P0,Mock GraphQL upstream,Create; deploy; query,200 with upstream data,testbench GraphQL,None (graphql_deploy.feature is gateway-direct),it: management-portal/deployments/graphql_cp.feature,
+GQL-02,Invalid schema is rejected,both,PA,negative,P1,,POST /graphql-apis/validate-schema with invalid SDL,400 with errors,,None,it: management-portal/deployments/graphql_cp.feature,
+GQL-03,GraphQL key issued in control plane is enforced,both,PA+GW,positive,P1,GQL-01,Issue key; query; revoke; query,200 then 401,,None,it: management-portal/deployments/graphql_cp.feature,
+GQL-04,"Publish GraphQL, subscribe in the portal and query with the portal key",both,PA+GW+AP,positive,P1,"GQL-01, portal registered",Publish; subscribe and generate key in portal; query gateway,200,,None,it: apiportal/publishing/publication_graphql.feature,

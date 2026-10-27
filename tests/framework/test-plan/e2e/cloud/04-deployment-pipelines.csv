@@ -1,0 +1,6 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-PIPE-01,Pipeline create and update promotion paths,cloud,PA,positive,P1,Two environments,Create pipeline dev to prod; update; list,Paths persisted,OpenChoreo,None,,
+C-PIPE-02,Default pipeline cannot be deleted,cloud,PA,negative,P1,,DELETE default,409,,None,,
+C-PIPE-03,Pipeline used by a project cannot be deleted,cloud,PA,negative,P1,Project bound to pipeline,DELETE pipeline,409,,None,,
+C-PIPE-04,Binding a project to a pipeline changes its deploy stages,cloud,PA+GW,positive,P1,Pipeline with 2 stages,PUT project deployment-pipeline; GET,Project reports the pipeline; deploy follows its order (see C-DEP-02),,None,,
+C-PIPE-05,Binding to a missing pipeline is refused,cloud,PA,negative,P2,,PUT unknown pipeline,4xx,,None,,

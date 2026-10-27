@@ -1,0 +1,5 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-LOG-01,Traffic produces access log lines,cloud,PA+GW,positive,P1,Deployed API,Invoke; query logs kind=access until present,Lines for the request,Cloud observability,None,,
+C-LOG-02,"Filters by kind, level, phrase and environment",cloud,PA+GW,positive,P1,,Query with each filter,Results match filter,,None,,
+C-LOG-03,Time window beyond retention is clamped,cloud,PA,positive,P2,,Query with an old start time,Window clamped; no error,,None,,
+C-LOG-04,Logs never include another org's data,cloud,PA+GW,isolation,P0,Traffic in two orgs,Org B queries with any parameters,Only org B lines,,None,,

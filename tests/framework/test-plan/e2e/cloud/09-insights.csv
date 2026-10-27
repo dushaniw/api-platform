@@ -1,0 +1,3 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-INS-01,Insights dashboard loads for the org,cloud,PA+GW,positive,P2,Console login; insights enabled,Open insights,Dashboard renders,Analytics provider,None,,Browser
+C-INS-02,API traffic shows in insights,cloud,PA+GW,positive,P2,,Invoke API; open insights,Requests counted,,None,,

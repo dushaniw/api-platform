@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+DOC-01,Document CRUD on an API,both,PA,positive,P2,API exists,"Create, list, get content, update, delete a document",Each operation reflected in reads,,None,it: management-portal/resources/api_documents.feature,
+DOC-02,"Selected documents, landing page and thumbnail appear on the portal",both,PA+AP,positive,P1,,,,,it: apiportal/publishing/publication_content.feature,covered,
+DOC-03,Oversized thumbnail or content is refused,both,PA,negative,P2,Low size limits,Upload above thumbnail / content limits,4xx with a size reason,,None,it: management-portal/resources/api_documents.feature,

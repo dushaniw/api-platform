@@ -1,0 +1,37 @@
+feature_code,feature,file,scope,deployment,topologies,scenarios,p0,p1,p2,covered,partial,new
+AUTH,Authentication and authorization (platform-api),platform/01-auth-and-rbac.csv,"File / internal_token / IDP auth modes, OpenAPI scope enforcement, role-to-scope mapping",both|on-prem,PA|PA+GW,11,3,4,4,0,3,8
+ORG,Organizations and multi-org isolation,platform/02-organizations-and-isolation.csv,"Org creation and seeding, org claim resolution, cross-org isolation for every resource",both|on-prem,PA|PA+GW,6,2,3,1,0,1,5
+PROJ,Projects (on-prem),platform/03-projects.csv,Project CRUD and delete guards,both,PA,3,0,2,1,1,0,2
+REST,REST API lifecycle,platform/04-rest-api-lifecycle.csv,"REST API CRUD, OpenAPI import and validation, versions, update and delete propagation",both,PA|PA+GW|PA+GW+AP,11,3,7,1,1,3,7
+DEP,Builds and deployments (all artifact kinds),platform/05-builds-and-deployments.csv,"Build snapshots, deploy / undeploy / restore state machine, limits, metadata overrides",both|on-prem,PA|PA+GW,12,3,7,2,4,2,6
+GWREG,"Gateway registration, tokens and manifest",platform/06-gateway-registration.csv,"Gateway CRUD, token rotation and revoke, manifest verification, custom policies",on-prem,PA|PA+GW,6,1,3,2,0,2,4
+SYNC,Control plane to gateway sync and resilience,platform/07-control-plane-sync-resilience.csv,"WebSocket events, replay on reconnect, cold start batch fetch, replicas",both|on-prem,PA+GW,6,2,3,1,0,3,3
+DP2CP,Gateway-created artifacts imported into the control plane,platform/08-gateway-artifact-import.csv,"DP to CP push, read-only guard, sync disabled, reconnect",on-prem,PA+GW,5,0,3,2,3,0,2
+KEY,API keys,platform/09-api-keys.csv,"Control-plane-issued keys for every artifact kind, propagation to gateways, ownership",both,PA|PA+GW,7,2,5,0,0,2,5
+SUB,"Applications, subscriptions and subscription plans",platform/10-applications-subscriptions-plans.csv,"Plans and throttling, subscription status, application keys and associations",both,PA|PA+GW,7,2,4,1,2,1,4
+MON,Monetization (meters and priced plans),platform/11-monetization.csv,"Meters, plan pricing, sync with the API Portal",both,PA|PA+AP|PA+GW+AP,5,0,3,2,2,1,2
+PUB,API Portal registration and API publication,platform/12-api-portal-publication.csv,"Portal registry, drafts, publish / deprecate / unpublish, failures and outages",both|on-prem,PA+AP|PA+GW+AP,10,2,5,3,3,1,6
+DOC,"API documents, landing page and thumbnails",platform/13-api-content.csv,"Docs CRUD, draft content, thumbnail limits, sync to the portal",both,PA|PA+AP,3,0,1,2,1,0,2
+HOOK,API Portal to control plane webhooks,platform/14-portal-webhooks.csv,"Signed webhook events for keys, subscriptions, applications, propagated to gateways",both|on-prem,PA|PA+GW+AP,7,2,4,1,1,0,6
+LLM,"LLM templates, providers and proxies",platform/15-llm-providers-proxies.csv,"Template management, provider and proxy lifecycle through the control plane, policies at the gateway",both,PA|PA+GW,6,2,3,1,1,2,3
+MCP,MCP proxies,platform/16-mcp-proxies.csv,"Server info fetch, deploy and invoke through the gateway, spec versions",both,PA|PA+GW,5,1,2,2,0,2,3
+AGT,Agent proxies (A2A),platform/17-agent-proxies.csv,"Agent card fetch, deploy, keys, recovery",both|on-prem,PA|PA+GW,3,0,1,2,2,0,1
+GQL,GraphQL APIs through the control plane,platform/18-graphql-apis.csv,"Schema validation, deploy and query, keys, publication",both,PA|PA+GW|PA+GW+AP,4,1,3,0,0,0,4
+SEC,Secrets,platform/19-secrets.csv,"Secret CRUD, placeholder resolution at the gateway, rotation, in-use guard",both|on-prem,PA|PA+GW,5,2,2,1,1,0,4
+OPS,Operational modes and configuration,platform/20-operations-and-config.csv,"Read-only mode, health, TLS",both|on-prem,PA|PA+GW,3,0,1,2,0,0,3
+DB,Database matrix and migration,platform/21-database-matrix.csv,"sqlite / postgres / sqlserver coverage, v1 to v2 migration",on-prem,PA+GW|PA+GW+AP,3,1,2,0,1,0,2
+COMPAT,Control plane and gateway version compatibility,platform/22-version-compatibility.csv,Current platform-api against supported gateway releases,on-prem,PA+GW,3,0,2,1,0,0,3
+E2E,"End-to-end journeys across platform-api, gateway and API Portal",platform/23-end-to-end-journeys.csv,Golden paths that cross all three deployables,both,PA+GW+AP,8,2,5,1,0,0,8
+EVT,Event gateway plugin (experimental build),platform/24-event-gateway-plugin.csv,WebSub and WebBroker APIs; only in builds that include the event gateway plugin,on-prem,PA+GW,3,0,0,3,0,0,3
+C-ORG,Cloud organization onboarding and purge,cloud/01-org-lifecycle.csv,"Org bootstrap (environments, default gateways, project, pipeline) and purge",cloud,PA|PA+GW,4,2,2,0,0,0,4
+C-ENV,Cloud environments,cloud/02-environments.csv,"Environment CRUD backed by OpenChoreo, delete guards",cloud,PA|PA+GW,7,3,4,0,1,2,4
+C-GW,Cloud managed gateways and gateway configuration,cloud/03-managed-gateways.csv,"Provisioning lifecycle, default per kind, delete, configuration editing",cloud,PA|PA+GW,11,2,7,2,0,2,9
+C-PIPE,Cloud deployment pipelines,cloud/04-deployment-pipelines.csv,"Pipeline CRUD, protection rules, project binding",cloud,PA|PA+GW,5,0,4,1,0,0,5
+C-PROJ,Cloud projects,cloud/05-projects.csv,Project create / delete kept in step with OpenChoreo,cloud,PA,4,1,3,0,0,2,2
+C-DEP,Cloud deployments and environment promotion,cloud/06-deployments-and-promotion.csv,"Environment-based deploy, build promotion, default gateway selection, kind rules",cloud,PA|PA+GW,12,4,6,2,0,1,11
+C-MAP,Cloud managed API Portals,cloud/07-managed-api-portals.csv,"Portal provisioning, consumer login, publish and consume, login environment switch, delete",cloud,PA|PA+AP|PA+GW+AP,11,5,5,1,0,0,11
+C-LOG,Cloud gateway logs,cloud/08-gateway-logs.csv,"Log query, filters, retention, isolation",cloud,PA|PA+GW,4,1,2,1,0,0,4
+C-INS,Cloud insights,cloud/09-insights.csv,Analytics dashboard embedding,cloud,PA+GW,2,0,0,2,0,0,2
+C-TRIAL,Cloud trial status,cloud/10-trial-status.csv,Trial badge and first-login activation,cloud,PA,2,0,0,2,0,0,2
+C-AUTH,"Cloud authentication, scopes and org isolation",cloud/11-auth-and-isolation.csv,"Gateway-asserted identity, scope matrix, two-org isolation for every cloud resource",cloud,PA,3,2,1,0,0,0,3
+C-E2E,Cloud end-to-end journeys,cloud/12-end-to-end-journeys.csv,"Golden paths across cloud control plane, managed gateway and managed portal",cloud,PA+GW|PA+GW+AP,3,1,2,0,0,0,3

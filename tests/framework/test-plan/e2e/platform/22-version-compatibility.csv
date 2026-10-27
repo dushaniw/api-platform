@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+COMPAT-01,REST API deployed to gateway 1.1.0 and 1.2.0 is served,on-prem,PA+GW,positive,P1,Gateway release matrix,Deploy and invoke on each release,200 on each,,None,,
+COMPAT-02,Kinds a gateway release does not support are refused up front,on-prem,PA+GW,negative,P1,Gateway 1.1.0,Deploy agent proxy and GraphQL API,Refused with a version reason,,None,,
+COMPAT-03,Gateway upgrade keeps existing deployments serving,on-prem,PA+GW,resilience,P2,APIs deployed on 1.1.0,Replace gateway with 1.2.0 using the same registration,All APIs still served,,None,,

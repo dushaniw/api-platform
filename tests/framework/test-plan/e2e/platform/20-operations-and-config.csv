@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+OPS-01,Read-only mode blocks writes except for allowed organizations,on-prem,PA,positive,P1,read_only.enabled with one writable org,Write in a blocked org; write in the writable org; read in both,503 for blocked writes; writes allowed for the writable org; reads succeed,,None,it: platform-api/operations/read_only.feature,
+OPS-02,Read-only mode keeps gateways serving,on-prem,PA+GW,resilience,P2,"API deployed, then read-only enabled",Restart gateway; call API,API still served,,None,,
+OPS-03,Health endpoint reports readiness,both,PA,positive,P2,,GET /health,200 when ready,,None,,

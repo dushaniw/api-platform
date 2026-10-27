@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-E2E-01,Platform journey: environment to consumer call,cloud,PA+GW+AP,positive,P0,Test org,Create environment and gateway; create project; bind pipeline; create API; deploy to dev; promote to prod; create portal; publish; consumer subscribes; invoke prod; check logs,Every step succeeds; consumer gets 200; access log present,,None,,
+C-E2E-02,AI journey: LLM provider and proxy through an AI gateway,cloud,PA+GW,positive,P1,AI gateway,Create secret; create provider and proxy; deploy; invoke,200,,None,,
+C-E2E-03,Teardown leaves nothing behind,cloud,PA+GW+AP,positive,P1,C-E2E-01,"Delete portal, undeploy, delete API, gateway, environment, project",Every resource gone; hosts stop answering,,None,,

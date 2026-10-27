@@ -1,0 +1,13 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-DEP-01,Deploy to the first environment uses its default gateway,cloud,PA+GW,positive,P0,Default gateway in dev,Deploy REST API to dev without naming gateways; invoke,200,,Partial: cloud/features/apip_basic.feature,extend existing,
+C-DEP-02,Direct deploy to a later pipeline stage is refused,cloud,PA,negative,P0,Pipeline dev to prod,Deploy straight to prod,400,,None,,
+C-DEP-03,Promote a build from dev to prod,cloud,PA+GW,positive,P0,C-DEP-01; prod gateway,Edit API in dev after build; promote build to prod; invoke prod,"Prod serves the promoted build, not the later edit",,None,,
+C-DEP-04,Promotion with a build not running in the source environment is refused,cloud,PA,negative,P1,,Promote with an unknown or stale buildId,400,,None,,
+C-DEP-05,Gateway selection rules,cloud,PA+GW,negative,P1,,Deploy to a non-ACTIVE gateway; deploy with several gateways and no default; omit a gateway already running the API,409 with no build; 400 ambiguous; 409 gateway set,,None,,
+C-DEP-06,Artifact kind must match gateway kind,cloud,PA+GW,negative,P1,Regular and AI gateways,Deploy REST to AI gateway; MCP / LLM proxy to regular gateway,Refused,,None,,
+C-DEP-07,Deployment parameters are validated and applied,cloud,PA+GW,positive,P1,Secret in the org,Deploy with endpoint override and apiKey as a secret reference; then with a plain apiKey,First applied at the gateway; second 400,,None,,
+C-DEP-08,Undeploy stops traffic,cloud,PA+GW,positive,P0,C-DEP-01,Undeploy; invoke,404,,None,,
+C-DEP-09,LLM provider environment deployment; promotion refused,cloud,PA+GW,positive,P1,AI gateway; provider with secret,Deploy provider to an environment; call; try to promote,200; promotion refused,mock or real LLM upstream,None,,
+C-DEP-10,Every AI kind deploys and answers,cloud,PA+GW,positive,P1,AI gateway,"Outline over MCP proxy, LLM proxy, agent proxy, GraphQL: deploy and invoke",Each answers,,None,,
+C-DEP-11,Partial gateway failure rolls back the whole deployment,cloud,PA+GW,resilience,P2,"Two gateways, one failing",Deploy to both,Previous builds restored on both,,None,,Needs fault injection
+C-DEP-12,Deploy page: stage cards deploy and promote (browser),cloud,PA+GW,positive,P2,Console login,Deploy and promote from the UI,Stages show the right build and status,,None,,Framework gap: cloud suite has no browser

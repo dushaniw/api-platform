@@ -1,0 +1,4 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+AGT-01,"Agent proxy management, cards, deployment, keys, import",both,PA+GW,positive,P1,,,,,"it: ai-workspace-gateway/agent/agent_proxy_{management,cards,deployment,api_keys,import}.feature",covered,
+AGT-02,Agent proxy survives restarts,both,PA+GW,resilience,P2,,,,,it: ai-workspace-gateway/agent/agent_proxy_recovery.feature,covered,
+AGT-03,Agent card cache refreshes after expiry,on-prem,PA,positive,P2,Short cache TTL,Fetch card; change card upstream; fetch after TTL,Updated card returned,a2a agent,None,,

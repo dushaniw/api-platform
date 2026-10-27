@@ -1,0 +1,3 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-TRIAL-01,Trial org sees days remaining,cloud,PA,positive,P2,Trial org,Open console,Badge shows days left,Cloud billing,None,,Browser
+C-TRIAL-02,Non-trial org sees no badge,cloud,PA,positive,P2,Paid org,Open console,No badge,,None,,

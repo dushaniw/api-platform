@@ -1,0 +1,8 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-ENV-01,Create environment with production flag and see it everywhere,cloud,PA,positive,P0,,"Create; list; open gateway form, pipeline picker and portal login picker",Listed with isProduction; selectable in all pickers,OpenChoreo,Partial: cloud/features/apip_environment.feature,extend existing,
+C-ENV-02,Duplicate environment name is a conflict,cloud,PA,negative,P1,,,,,cloud/features/apip_environment.feature,covered,
+C-ENV-03,Environment with a bound gateway cannot be deleted,cloud,PA+GW,negative,P0,Environment with a managed gateway (including the default),DELETE environment,409; environment still listed,,None,cloud: cloud/features/apip_environment.feature,
+C-ENV-04,Environment referenced by a pipeline cannot be deleted,cloud,PA,negative,P1,Pipeline referencing the environment,DELETE environment,409 deletion blocked,OpenChoreo,None,,
+C-ENV-05,Empty environment delete completes asynchronously,cloud,PA,positive,P1,Environment without gateways or pipelines,DELETE; poll list,Eventually absent,,Partial: cloud/features/apip_environment.feature,,
+C-ENV-06,Another org cannot see or delete my environment,cloud,PA,isolation,P0,Two test orgs,Org B lists and deletes org A environment,Not listed; delete 404,,None,,
+C-ENV-07,Environment scopes are enforced,cloud,PA,security,P1,User without environment create or delete scope,Create; delete,403,,None,,

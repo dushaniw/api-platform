@@ -1,0 +1,5 @@
+id,scenario,deployment,topology,type,priority,preconditions,steps,expected_result,external_systems,existing_coverage,proposed_location,notes
+C-PROJ-01,Create project: status becomes active,cloud,PA,positive,P0,,Create; GET until status active,active,OpenChoreo,Partial: cloud/features/apip_project.feature,extend existing,
+C-PROJ-02,Duplicate project has no side effects,cloud,PA,negative,P1,,Create twice,409; one project,,None,,
+C-PROJ-03,Delete then recreate with the same name,cloud,PA,positive,P1,,Delete; create same name,Second create succeeds,,None,,
+C-PROJ-04,Default project is present and active,cloud,PA,positive,P1,,List projects,Default project active,,Partial: cloud steps find the default project,,
