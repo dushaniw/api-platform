@@ -23,9 +23,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { useApiPublications } from '@/api/resources/apiPublications';
 import { EmptyState, LoadingState } from '@/components/StateViews';
-import { useExtensions } from '@/extensions';
-import { routes } from '@/routes/paths';
 import { useConsoleScope } from '@/scope/ConsoleScopeProvider';
+import { usePortalRegistryPath } from '../apiPortals/usePortalRegistryPath';
 import { PortalPublicationCard } from './components/PortalPublicationCard';
 import { PublicationLoadError } from './components/PublicationLoadError';
 import { restPublishTarget, type PublishTarget } from './publishTarget';
@@ -115,11 +114,8 @@ export function ApiPortalPublicationsList({ apiName, target: targetProp }: ApiPo
   const [search, setSearch] = useState('');
   const publicationsQuery = useApiPublications(target.apiType, apiHandler, { limit: LIST_LIMIT });
 
-  // The empty-state "Add Portal" action points at the org-level portal registry,
-  // which lives in a cloud plugin. The OSS build has no such route, so guard on
-  // the extension being registered rather than emit a link that would 404.
-  const extensions = useExtensions();
-  const hasManagedPortalsExtension = extensions.some((ext) => ext.id === 'managed-api-portals');
+  // The empty-state "Add Portal" action opens the org-level portal registry.
+  const portalRegistryPath = usePortalRegistryPath();
 
   // `isPending`, not `isLoading`: a disabled query reports `isLoading: false`
   // with no data, which would flash the empty state while scope resolves.
@@ -170,15 +166,9 @@ export function ApiPortalPublicationsList({ apiName, target: targetProp }: ApiPo
 
       {publications.length === 0 ? (
         <EmptyState
-          actionLabel={
-            hasManagedPortalsExtension ? intl.formatMessage(messages.emptyAction) : undefined
-          }
+          actionLabel={intl.formatMessage(messages.emptyAction)}
           description={intl.formatMessage(messages.emptyDescription)}
-          onAction={
-            hasManagedPortalsExtension
-              ? () => navigate(routes.managedApiPortals(orgHandle))
-              : undefined
-          }
+          onAction={() => navigate(portalRegistryPath(orgHandle))}
           title={intl.formatMessage(messages.emptyTitle)}
         />
       ) : (

@@ -56,6 +56,7 @@ import { NewProjectDialog } from '@/pages/appShell/appShellPages/projects/compon
 import { routes } from '@/routes/paths';
 import { useConsoleScope } from '@/scope/ConsoleScopeProvider';
 import { relativeTime } from '@/utils/relativeTime';
+import { usePortalRegistryPath } from '../apiPortals/usePortalRegistryPath';
 import ExploreMoreCard from './components/ExploreMoreCard';
 import { Can } from '@/permissions/Can';
 
@@ -300,6 +301,7 @@ function OrganizationHomePageContent() {
   const organizationQuery = useOrganization(orgHandle);
   const gatewaysQuery = useGateways({ limit: 100 });
   const portalsQuery = useApiPortals();
+  const portalRegistryPath = usePortalRegistryPath();
   const deleteProjectMutation = useDeleteProject();
   const restApiCountsQuery = useRestApiCounts(projects.map((project) => project.id));
   const graphqlApiCountsQuery = useGraphQLApiCounts(projects.map((project) => project.id));
@@ -429,7 +431,7 @@ function OrganizationHomePageContent() {
                   ? '—'
                   : intl.formatNumber(portalsQuery.data?.pagination.total ?? 0)
               }
-              onAction={() => navigate(routes.managedApiPortals(orgHandle))}
+              onAction={() => navigate(portalRegistryPath(orgHandle))}
               title={intl.formatMessage(messages.developerPortalTitle)}
               operationId="CreateApiPortal"
             />

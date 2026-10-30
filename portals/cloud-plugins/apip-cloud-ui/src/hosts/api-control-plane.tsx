@@ -380,6 +380,9 @@ export const cloudPluginFeatures: CloudPluginFeature<ApiControlPlaneCloudEntry>[
       {
         id: 'managed-api-portals',
         slot: 'sidebar.organization',
+        // Takes the place of the built-in registry of self-hosted portals,
+        // which the cloud does not offer.
+        claims: 'apiPortals',
         // Placed after Pipelines (50); no built-in item competes for 60.
         order: 60,
         routePath: 'managed-api-portals',
